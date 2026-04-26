@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ItemForm({ initialValues, onSubmit, submitText }) {
   const [formData, setFormData] = useState(
@@ -8,8 +8,23 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
       price: "",
       description: "",
       imageUrl: "",
+      couponCode: "",
     }
   );
+
+  useEffect(() => {
+    if (initialValues) {
+      setFormData({
+        name: "",
+        category: "",
+        price: "",
+        description: "",
+        imageUrl: "",
+        couponCode: "",
+        ...initialValues,
+      });
+    }
+  }, [initialValues]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +69,9 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
 
       <label>Image URL</label>
       <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
+
+      <label>Coupon Code</label>
+      <input name="couponCode" value={formData.couponCode} onChange={handleChange} placeholder="e.g. SAVE10" />
 
       <button className="btn primary" type="submit">{submitText}</button>
     </form>

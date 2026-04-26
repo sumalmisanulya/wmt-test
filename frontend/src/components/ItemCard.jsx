@@ -12,6 +12,11 @@ function ItemCard({ item, onDelete }) {
       <p><strong>Category:</strong> {item.category}</p>
       <p><strong>Price:</strong> ${item.price}</p>
       <p>{item.description}</p>
+      {item.couponCode && (
+        <p>
+          <strong style={{ color: 'red' }}>Coupon Code:</strong> {item.couponCode}
+        </p>
+      )}
 
       <div className="card-actions">
         <Link className="btn secondary" to={`/edit-item/${item._id}`}>Edit</Link>
